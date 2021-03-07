@@ -1,19 +1,21 @@
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Loader {
     public static void main(String[] args) {
         String text = "Вася заработал 5000 рублей, Петя - 7563 рубля, а Маша - 30000 рублей";
         System.out.println(text);
 
-//        for (char i = 'a'; i <= 'z'; i++) {
-//            int c = i;
-//            System.out.println(i + " :" + c + ".");
-//        }
-//        System.out.println("\n ========================\n");
-//        for (char j = 'а'; j <= 'я'; j++) {
-//            int x = j;
-//            System.out.println(j + " :" + x + ".");
-//        }
+        for (char i = 'a'; i <= 'z'; i++) {
+            int c = i;
+            System.out.println(i + " :" + c + ".");
+        }
+        System.out.println("\n ========================\n");
+        for (char j = 'а'; j <= 'я'; j++) {
+            int x = j;
+            System.out.println(j + " :" + x + ".");
+        }
 
         int v1 = text.indexOf("Вася заработал");
         int v2 = text.indexOf("руб");
@@ -30,7 +32,29 @@ public class Loader {
         int summ = Integer.parseInt(str1) + Integer.parseInt(str2) + Integer.parseInt(str3);
         System.out.println(String.format("Вася, Петя и Маша заработали %d рублей", summ));
 
+        // ========================
+//        String FIO = "Фёдоров Дмитрий Петрович";
         Scanner sc = new Scanner(System.in);
+        System.out.println("Введите ФИО!");
+        String FIO = sc.nextLine();
 
+        Pattern pattern = Pattern.compile("\\d+");
+        Matcher matcher = pattern.matcher(FIO);
+        if (FIO.equals("0") || FIO.equals(" ") || FIO.equals("") || FIO.equals(null) || matcher.find()
+                || FIO.split(" ").length == 1 || FIO.split(" ").length == 2) {
+            System.out.println("Неправильно!");
+        } else {
+            int F = FIO.indexOf(" ");
+            String str4 = FIO.substring(0, F).trim();
+
+            int FN = FIO.lastIndexOf(" ");
+            String str5 = FIO.substring(F, FN).trim();
+
+            int LN = FIO.lastIndexOf(" ");
+            String str6 = FIO.substring(LN);
+
+            System.out.println("Фамилия: " + str4 + " \nИмя: " + str5 + "\nОтчество: " + str6);
+
+        }
     }
 }
